@@ -3,6 +3,11 @@
 1. Raspberry Pi
 2. Cando USB To CAN Module 
 
+## Installation
+``` bash
+pip3 install -r requirements.txt
+```
+
 ## UDP Testing with virtual CAN network (Linux only)
 1. Create a virtual can interface using SocketCAN run the following:
     ``` bash

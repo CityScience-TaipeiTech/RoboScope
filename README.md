@@ -43,6 +43,7 @@ pip3 install -r requirements.txt
     candump can0
     ```
 4. Drag slider bars (in Grasshopper) then you will see something similar to this:
+5. 
   ![image](./docs/vcan_test.png)
 
 ## [TEST] Send JSON to Grasshopper through UDP

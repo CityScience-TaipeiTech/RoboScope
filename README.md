@@ -17,6 +17,7 @@
 
 ### Set up Raspberry Pi IP address on Grasshopper
 Here we assume that Raspberry Pi is hosted at `10.100.2.97`
+
 ![image](./docs//Grasshopper_ip_setup.png)
 
 ## CanbusController (run at Raspberry Pi)
@@ -42,8 +43,7 @@ pip3 install -r requirements.txt
     candump can0
     ```
 4. Drag slider bars (in Grasshopper) then you will see something similar to this:
-
- ![image](./docs/vcan_test.png)
+  ![image](./docs/vcan_test.png)
 
 ## [TEST] Send JSON to Grasshopper through UDP
 We assume the ip address of Grasshopper computer is `192.168.0.2`.

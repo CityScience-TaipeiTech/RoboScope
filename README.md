@@ -44,7 +44,7 @@ pip3 install -r requirements.txt
     ```
 4. Drag slider bars (in Grasshopper) then you will see something similar to this:
 
-  ![image](./docs/vcan_test.png)
+    ![image](./docs/vcan_test.png)
 
 ## [TEST] Send JSON to Grasshopper through UDP
 We assume the ip address of Grasshopper computer is `192.168.0.2`.

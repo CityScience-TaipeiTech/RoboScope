@@ -5,14 +5,14 @@
 ### Method 1 - Connect through a Router 
 - Both Grasshopper computer and Raspberry Pi connect to a router.
 - Check IP address of the Raspberry Pi.
-### Method 2 - Ethernet Cable direct connect 
-- Connect Grasshopper computer and Raspberry Pi via a Ethernet cable and the network setting:
+### Method 2 - Connect through Ethernet cable  
+- Connect Grasshopper computer and Raspberry Pi via a Ethernet cable directly and follow the cofiguration below to set up a network:
   | Device |   IP  |  Mask | Gateway |
   |  ---   |  ---  |  ---  |   ---   |
   | Grasshopper computer | 192.168.0.2 | 255.255.255.0| 0.0.0.0|
   | Raspberry Pi | 192.168.0.1 | 255.255.255.0 | 0.0.0.0 |
 ## Rhino Grasshopper
-### Plugin Installation
+### Install Plugin
 1. Networking plugin: `gHowl` can be downloaded from [here](https://www.food4rhino.com/en/app/ghowl). And check [this instruction](https://www.food4rhino.com/en/faq#users-install-grasshopper-plugin) to install the plugin.
 
 ### Set up Raspberry Pi IP address on Grasshopper
@@ -41,16 +41,16 @@ pip3 install -r requirements.txt
     ``` bash
     candump can0
     ```
-4. Moving the slide bar (in Grasshopper) then you will see some similar to this:
+4. Drag slider bars (in Grasshopper) then you will see something similar to this:
  ![image](./docs/vcan_test.png)
 
-## [TEST] Sending JSON to Grasshopper through UDP
+## [TEST] Send JSON to Grasshopper through UDP
 We assume the ip address of Grasshopper computer is `192.168.0.2`.
 ``` bash
 cd CanbusController/test
 ./Json2UdpClient.py -i 192.168.0.2 -f grasshopper_output.json
 ```
-## [TEST] Sending Recorded CAN bus Data to Grasshopper through UDP
+## [TEST] Send Recorded CAN bus Data to Grasshopper through UDP
 1. Start service
     ``` bash
     cd CanbusController

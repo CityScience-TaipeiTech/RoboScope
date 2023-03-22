@@ -32,3 +32,11 @@ pip3 install -r requirements.txt
     As result, the output of terminal at step 3 shows: 
 
     ![image](../docs/vcan_test.png)
+    ### Record CAN bus data on `vcan0`
+    ``` bash
+    candump -L vcan0 > can.log
+    ```
+    ### Play recorded CAN bus data on `vcan0`
+    ``` bash
+    canplayer vcan0=vcan0 -I can.log
+    ```

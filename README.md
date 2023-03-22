@@ -20,20 +20,44 @@ Here we assume that Raspberry Pi is hosted at `10.100.2.97`
 ![image](./docs//Grasshopper_ip_setup.png)
 
 ## CanbusController (run at Raspberry Pi)
-1. Install requirements
-    ``` bash
-    cd CanbusController
-    pip3 install -r requirements.txt
-    ```
-2. Plug in CANDO and start interface
+### Installation
+``` bash
+sudo apt-get install can-utils
+cd CanbusController
+pip3 install -r requirements.txt
+```
+### Quick Start
+1. Plug in CANDO and start interface.
     ``` bash
     sudo ip link set can0 up type can bitrate 1000000
     ```
-3. Start `UdpServer2CANbus.py`
+2. Start `UdpServer2CANbus.py` service.
+    
+    Here, we assume the ip of Raspberry Pi is `192.168.0.1`, and the ip address of Grasshopper computer is `192.168.0.2`
     ``` bash
-    ./UdpServer2CANbus.py -i 10.100.2.97 -p 5005 -c can0
+    ./UdpServer2CANbus.py -i 192.168.0.1 -p 5005 -gi 192.168.0.2 -gp 5005 -c can0
     ```
-4. Show CAN bus raw data.
+3. You can see CAN bus raw data by:
     ``` bash
     candump can0
+    ```
+4. Moving the slide bar (in Grasshopper) then you will see some similar to this:
+ ![image](./docs/vcan_test.png)
+
+## [TEST] Sending JSON to Grasshopper through UDP
+We assume the ip address of Grasshopper computer is `192.168.0.2`.
+``` bash
+cd CanbusController/test
+./Json2UdpClient.py -i 192.168.0.2 -f grasshopper_output.json
+```
+## [TEST] Sending Recorded CAN bus Data to Grasshopper through UDP
+1. Start service
+    ``` bash
+    cd CanbusController
+    ./Json2UdpClient.py -i 192.168.0.2 -f grasshopper_output.json -c vcan0
+    ```
+2. Play recorded CAN bus data on `vcan0`.
+    ``` bash
+    cd CanbusController/test
+    canplayer vcan0=vcan0 -I can.log
     ```

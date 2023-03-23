@@ -46,6 +46,16 @@ pip3 install -r requirements.txt
 
     ![image](./docs/vcan_test.png)
 
+### Record CAN bus message
+1. Setup SocketCAN interface on `can0` with bitrate 1 Mbps.
+    ``` bash
+    sudo ip link set can0 up type can bitrate 1000000
+    ```
+2. Record CAN log.    
+    ``` bash
+    candump -L can0 > can.log
+    ```
+
 ## UDP data format
 We use JSON format to transmit data between Grasshopper and Raspberry Pi.
 ``` json

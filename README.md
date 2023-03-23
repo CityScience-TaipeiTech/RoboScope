@@ -46,13 +46,47 @@ pip3 install -r requirements.txt
 
     ![image](./docs/vcan_test.png)
 
-## [TEST] Send JSON to Grasshopper through UDP
+## UDP data format
+We use JSON format to transmit data between Grasshopper and Raspberry Pi.
+``` json
+{
+    "data": [
+        {
+            "position": {
+                "x": 0, // row 
+                "y": 0  // column
+            },
+            "height": 10
+        },
+        {
+            "position": {
+                "x": 0,
+                "y": 1
+            },
+            "height": 20
+        }
+    ]
+}
+``` 
+## CAN Bus ID and Filter setting
+### ID mapping 
+A row-major order is adapted in this system. 
+A ID in a $n\times n$ matrix system can be calculated with: 
+$$ID = nx+y+\theta$$
+$\theta$ is the offset of CAN ID (default $\theta=$ `0x100`)
+### Filter setting
+| Device | ID | Mask |
+| --- | --- | --- |
+| Raspberry Pi | 0x000 | 0xF00 |
+
+## Component Testing 
+### Send JSON to Grasshopper through UDP
 We assume the ip address of Grasshopper computer is `192.168.0.2`.
 ``` bash
 cd CanbusController/test
 ./Json2UdpClient.py -i 192.168.0.2 -f grasshopper_output.json
 ```
-## [TEST] Send Recorded CAN bus Data to Grasshopper through UDP
+## Send recorded CAN bus data to Grasshopper through UDP
 1. Start service
     ``` bash
     cd CanbusController
@@ -61,5 +95,15 @@ cd CanbusController/test
 2. Play recorded CAN bus data on `vcan0`.
     ``` bash
     cd CanbusController/test
-    canplayer vcan0=vcan0 -I can.log
+    canplayer vcan0=vcan0 -I ./CanbusController/test/can2udp.log
+    ```
+
+## Send recorded CAN bus data to control RoboScope
+1. Setup SocketCAN interface on `can0` with bitrate 1 Mbps.
+    ``` bash
+    sudo ip link set can0 up type can bitrate 1000000
+    ```
+2. Play CAN log.    
+    ``` bash
+    canplayer can0=vcan0 -I ./CanbusController/test/udp2can.log
     ```
